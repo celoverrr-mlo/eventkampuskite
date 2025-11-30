@@ -1,46 +1,4 @@
-<?php
-session_start();
-require "../includes/koneksi.php"; // koneksi mysqli $conn
 
-// ------------------------------------------------------------
-// VALIDASI LOGIN
-// ------------------------------------------------------------
-if (!isset($_SESSION['user_id'])) {
-    echo "<script>alert('Silakan login terlebih dahulu.'); window.location='login.php';</script>";
-    exit;
-}
-
-$user_id = $_SESSION['user_id'];
-$event_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
-if ($event_id <= 0) {
-    echo "<script>alert('ID event tidak valid.'); history.back();</script>";
-    exit;
-}
-
-// ------------------------------------------------------------
-// CEK APAKAH EVENT SUDAH PERNAH DISIMPAN
-// ------------------------------------------------------------
-$check = $conn->prepare("SELECT id FROM save_events WHERE user_id = ? AND event_id = ?");
-$check->bind_param("ii", $user_id, $event_id);
-$check->execute();
-$check->store_result();
-
-$already_saved = $check->num_rows > 0;
-
-// ------------------------------------------------------------
-// JIKA BELUM ADA, MASUKKAN KE DATABASE
-// ------------------------------------------------------------
-if (!$already_saved) {
-    $stmt = $conn->prepare("INSERT INTO save_events (user_id, event_id) VALUES (?, ?)");
-    $stmt->bind_param("ii", $user_id, $event_id);
-    $stmt->execute();
-}
-
-// ------------------------------------------------------------
-// TAMPILKAN POPUP THEN AUTO REDIRECT
-// ------------------------------------------------------------
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
