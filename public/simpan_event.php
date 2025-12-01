@@ -245,7 +245,6 @@ footer.navbar i {
 
 <footer class="navbar">
     <a href="index.php"><i class="fa-solid fa-house"></i>Home</a>
-    <a href="all_kategories.php"><i class="fa fa-th-large"></i>Kategori</a>
     <a href="simpan_event.php"><i class="fa fa-bookmark"></i>Simpan</a>
     <a href="profile.php"><i class="fa-solid fa-user"></i>Akun</a>
 </footer>
