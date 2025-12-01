@@ -35,7 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $latitude    = $_POST['latitude'];
     $longitude   = $_POST['longitude'];
     $google_form_link = $_POST['google_form_link'] ?? null;
-    $social_media     = $_POST['social_media'] ?? null;
+    // input social media menyesuaikan bagian add_event
+    $social_type = $_POST['social_type'] ?? '';
+    $social_link = $_POST['social_link'] ?? '';
+    $social_media = '';
+        if (!empty($social_type) && !empty($social_link)) {
+        $social_media = $social_type . "|" . $social_link;
+    }
 
     // === DATE handling: input datetime-local gives "YYYY-MM-DDTHH:MM"
     // Convert to "YYYY-MM-DD HH:MM:SS" for MySQL TIMESTAMP
@@ -181,7 +187,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="google_form_link" value="<?= htmlspecialchars($event['google_form_link']); ?>">
 
         <label>Sosial Media Penyelenggara</label>
-        <input type="text" name="social_media" value="<?= htmlspecialchars($event['social_media']); ?>">
+        <select name="social_type" class="form-control"> 
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="whatsapp">WhatsApp</option>
+        </select>
+        <input type="text" 
+             name="social_link" 
+             placeholder="Masukkan link sosial media..." 
+             class="form-control"
+             style="margin-top:6px;">
 
         <!-- === TIMESTAMP DATE === -->
         <label>Tanggal Event</label>
