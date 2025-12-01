@@ -145,6 +145,9 @@ header {
     box-shadow: 4px 4px 8px rgba(136, 140, 144, 0.2);
     overflow: hidden;
 }
+.card:hover {
+    transform: scale(1.02);
+}
 
 .card img {
     width: 100%;
