@@ -102,7 +102,6 @@ img { border-radius: 6px; }
             <th>No</th>
             <th>Judul</th>
             <th>Kategori</th>
-            <th>Status</th>
             <th>Banner</th>
             <th>Aksi</th>
         </tr>
@@ -113,7 +112,6 @@ img { border-radius: 6px; }
                     <td><?= $no++; ?></td>
                     <td><?= htmlspecialchars($row['title']); ?></td>
                     <td><?= htmlspecialchars($row['category_name'] ?? '-'); ?></td>
-                    <td><?= htmlspecialchars($row['status']); ?></td>
 
                     <td>
                         <?php if (!empty($row['banner'])): ?>
