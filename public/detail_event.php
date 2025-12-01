@@ -233,6 +233,70 @@ body {
             </div>
 
             <div style="margin-top:16px;">
+                <strong style="font-size:16px;">Sosial Media Penyelenggara</strong>
+
+                <?php
+                $old_type = '';
+                $old_link = '';
+            
+                if (!empty($event['social_media'])) {
+            
+                    // Format: instagram|https://instagram.com/xxxx
+                    $explode = explode('|', $event['social_media']);
+                    $old_type = strtolower($explode[0] ?? '');
+                    $old_link = $explode[1] ?? '';
+            
+                    // Default
+                    $platform = ucfirst($old_type);
+                    $icon = "fas fa-link";
+            
+                    if ($old_type === 'instagram') {
+                        $icon = "fab fa-instagram";
+                    } elseif ($old_type === 'facebook') {
+                        $icon = "fab fa-facebook";
+                    } elseif ($old_type === 'tiktok') {
+                        $icon = "fab fa-tiktok";
+                    } elseif ($old_type === 'youtube') {
+                        $icon = "fab fa-youtube";
+                    }
+                ?>
+            
+                <a href="<?= htmlspecialchars($old_link) ?>" target="_blank" style="text-decoration:none;">
+                    <div style="
+                        margin-top:12px;
+                        display:flex;
+                        align-items:center;
+                        gap:14px;
+                        padding:12px;
+                        background:#f8fafc;
+                        border-radius:14px;
+                        border:1px solid #e5e7eb;
+                    ">
+                        <div style="
+                            width:38px; height:38px;
+                            background:white;
+                            border-radius:50%;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;
+                            box-shadow:0 2px 4px rgba(0,0,0,0.08);
+                            font-size:18px;
+                        ">
+                            <i class="<?= $icon ?>"></i>
+                        </div>
+            
+                        <div style="font-size:15px; color:#111;">
+                            <?= $platform ?>
+                        </div>
+                    </div>
+                </a>
+            
+                <?php } else { ?>
+                    <p style="color:#6b7280;">Tidak ada sosial media.</p>
+                <?php } ?>
+            </div>
+
+            <div style="margin-top:16px;">
                 <strong>Lokasi Event</strong><br>
                 <small style="color:#6b7280;">(Ditampilkan pada peta)</small>
                 <?php if ($hasCoords): ?>
