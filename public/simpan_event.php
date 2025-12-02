@@ -200,7 +200,7 @@ footer.navbar i {
                 <h3><?= htmlspecialchars($row['title']) ?></h3>
 
                 <div class="info">
-                    <strong>Tanggal:</strong><br>
+                    <strong>Tanggal Event:</strong><br>
                     <?= !empty($row['event_date']) ? date('d M Y', strtotime($row['event_date'])) : '-' ?>
                 </div>
 
