@@ -14,6 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $longitude   = floatval($_POST['longitude']);
 
     $google_form_link = $_POST['google_form_link'] ?? null;
+    $social_type = $_POST['social_type'] ?? '';
+    $social_link = $_POST['social_link'] ?? '';
+    $social_media = '';
+        if (!empty($social_type) && !empty($social_link)) {
+        $social_media = $social_type . "|" . $social_link;
+    }
 
     // === FIELD DATE (TIMESTAMP) ===
     $event_date = $_POST['event_date']; // pastikan format 'YYYY-MM-DDTHH:MM'
@@ -38,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // --- INSERT DATABASE ---
     $stmt = $conn->prepare("
         INSERT INTO events
-        (category_id, title, description, banner, google_form_link, created_by, status, latitude, longitude, event_date)
+        (category_id, title, description, banner, google_form_link, social_media, created_by, status, latitude, longitude, event_date)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
 
@@ -47,12 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->bind_param(
-        "issssissds",
+        "isssssissds",
         $category_id,
         $title,
         $description,
         $bannerName,
         $google_form_link,
+        $social_media,
         $created_by,
         $status,
         $latitude,
@@ -118,6 +125,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <label>Tanggal Event</label>
         <input type="datetime-local" name="event_date" required>
+
+        <label>Sosial Media Penyelenggara</label>
+        <select name="social_type" class="form-control"> 
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="whatsapp">WhatsApp</option>
+        </select>
+        <input type="text" 
+             name="social_link" 
+             placeholder="Masukkan link sosial media..." 
+             class="form-control"
+             style="margin-top:6px;">
+
 
         <label>Pilih Lokasi Event (klik map)</label>
         <input type="text" id="latitude" name="latitude" placeholder="Latitude" readonly required>
