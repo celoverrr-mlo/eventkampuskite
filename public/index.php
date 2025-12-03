@@ -2,7 +2,7 @@
 include '../includes/koneksi.php';
 
 session_start();
-$user_name = $_SESSION['user_name'] ?? 'Anggi'; // Nama pengguna default
+$user_name = $_SESSION['user_name'] ?? ''; // Nama pengguna default
 
 $search = $_GET['search'] ?? '';
 
