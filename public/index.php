@@ -308,6 +308,10 @@ if(s.length>0){
     <a href="simpan_event.php">
         <i class="fa fa-bookmark save-logo"></i><span>Simpan</span>
     </a>
+        
+    <a href="ajukan-event.php">
+        <i class="fa fa-calendar-plus"></i><span>Ajukan Event</span>
+    </a>
 
     <a href="profile.php">
       <i class="fa-solid fa-user"></i><span>Akun</span>
